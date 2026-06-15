@@ -215,8 +215,8 @@ body {
 
 .pedestal-wrapper {
   position: relative;
-  width: 270px;
-  height: 270px;
+  width: 400px;
+  height: 400px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -232,8 +232,8 @@ body {
 
 .pedestal.shadow {
   bottom: -10px;
-  width: 250px;
-  height: 60px;
+  width: 370px;
+  height: 90px;
   background: rgba(0, 0, 0, 0.25);
   filter: blur(10px);
   z-index: 1;
@@ -241,8 +241,8 @@ body {
 
 .pedestal.body {
   bottom: 0px;
-  width: 230px;
-  height: 50px;
+  width: 340px;
+  height: 75px;
   background: radial-gradient(ellipse at top, var(--pedestal-clay) 0%, var(--pedestal-rim) 100%);
   border: 4px solid rgba(255, 255, 255, 0.4);
   box-shadow: 
@@ -254,9 +254,9 @@ body {
 /* Characters Rendering */
 .character-container {
   position: absolute;
-  bottom: 32px; /* rest slightly on top of pedestal */
-  width: 250px;
-  height: 250px;
+  bottom: 45px; /* rest slightly on top of pedestal */
+  width: 375px;
+  height: 375px;
   z-index: 5;
   display: flex;
   justify-content: center;
@@ -276,7 +276,7 @@ body {
 .char-img {
   width: auto;
   height: 100%;
-  max-width: 250px;
+  max-width: 375px;
   object-fit: contain;
   display: none;
   filter: drop-shadow(0 15px 10px rgba(0, 0, 0, 0.3));
@@ -299,7 +299,7 @@ body {
 .animal-img {
   width: auto;
   height: 100%;
-  max-width: 230px;
+  max-width: 345px;
   object-fit: contain;
   display: none;
   filter: drop-shadow(0 15px 10px rgba(0, 0, 0, 0.35));
@@ -323,7 +323,7 @@ body {
 /* Speech Bubble structure */
 .speech-bubble {
   position: absolute;
-  top: -95px;
+  top: -110px;
   left: 50%;
   transform: translateX(-50%) scale(0);
   background: rgba(255, 255, 255, 0.95);
@@ -712,27 +712,27 @@ body {
     height: 65vh;
   }
   .pedestal-wrapper {
-    width: 210px;
-    height: 210px;
+    width: 315px;
+    height: 315px;
   }
   .pedestal.body {
-    width: 185px;
-    height: 40px;
+    width: 275px;
+    height: 60px;
   }
   .pedestal.shadow {
-    width: 200px;
-    height: 45px;
+    width: 300px;
+    height: 65px;
   }
   .character-container {
-    width: 190px;
-    height: 190px;
-    bottom: 25px;
+    width: 285px;
+    height: 285px;
+    bottom: 35px;
   }
   .animal-img, .char-img {
-    max-width: 180px;
+    max-width: 270px;
   }
   .speech-bubble {
-    top: -85px;
+    top: -100px;
     padding: 8px 16px;
   }
   .speech-text {
@@ -754,27 +754,27 @@ body {
     gap: 40px;
   }
   .pedestal-wrapper {
-    width: 160px;
-    height: 140px;
+    width: 240px;
+    height: 210px;
   }
   .pedestal.body {
-    width: 145px;
-    height: 30px;
+    width: 215px;
+    height: 45px;
   }
   .pedestal.shadow {
-    width: 150px;
-    height: 30px;
+    width: 225px;
+    height: 45px;
   }
   .character-container {
-    width: 140px;
-    height: 140px;
-    bottom: 20px;
+    width: 210px;
+    height: 210px;
+    bottom: 30px;
   }
   .animal-img, .char-img {
-    max-width: 130px;
+    max-width: 195px;
   }
   .speech-bubble {
-    top: -75px;
+    top: -90px;
   }
 }
 
