@@ -2,12 +2,14 @@
 :root {
   --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   
-  /* HSL Color Palette (Bright, Nintendo Link's Awakening-like) */
-  --bg-gradient: linear-gradient(135deg, #a5b4fc 0%, #818cf8 50%, #6366f1 100%);
-  --sky-color: linear-gradient(to bottom, #7dd3fc 0%, #bae6fd 60%, #e0f2fe 100%);
-  --ground-color: radial-gradient(circle at center, #86efac 0%, #4ade80 70%, #22c55e 100%);
-  --pedestal-clay: #fca5a5;
-  --pedestal-rim: #ef4444;
+  /* HSL Color Palette (Photorealistic Studio Ambient & Wooden Diorama) */
+  --bg-gradient: linear-gradient(135deg, #cbd5e1 0%, #a1a1aa 50%, #71717a 100%);
+  --sky-color: radial-gradient(circle at 20% 30%, #fef3c7 0%, rgba(254, 243, 199, 0.4) 30%, transparent 70%),
+               radial-gradient(circle at 80% 40%, #fce7f3 0%, rgba(252, 231, 243, 0.3) 40%, transparent 80%),
+               radial-gradient(circle at 50% 60%, #bae6fd 0%, #e0f2fe 50%, #f1f5f9 100%);
+  --ground-color: linear-gradient(to bottom, #fdba74 0%, #fdd1a9 40%, #ffedd5 100%);
+  --pedestal-clay: #fcd34d;
+  --pedestal-rim: #b45309;
   --text-dark: #1e1b4b;
   --text-light: #ffffff;
   --accent-color: #f59e0b;
@@ -124,6 +126,10 @@ body {
   overflow: hidden;
 }
 
+.sun, .clouds {
+  display: none !important;
+}
+
 .sun {
   position: absolute;
   top: 40px;
@@ -225,7 +231,7 @@ body {
 
 .pedestal {
   position: absolute;
-  border-radius: 50%;
+  border-radius: 16px; /* Changed from 50% to make it a rectangular wood block */
   left: 50%;
   transform: translateX(-50%);
 }
@@ -233,20 +239,20 @@ body {
 .pedestal.shadow {
   bottom: -10px;
   width: 370px;
-  height: 90px;
+  height: 80px;
   background: rgba(0, 0, 0, 0.25);
-  filter: blur(10px);
+  filter: blur(15px);
   z-index: 1;
 }
 
 .pedestal.body {
   bottom: 0px;
   width: 340px;
-  height: 75px;
-  background: radial-gradient(ellipse at top, var(--pedestal-clay) 0%, var(--pedestal-rim) 100%);
-  border: 4px solid rgba(255, 255, 255, 0.4);
+  height: 60px;
+  background: linear-gradient(to bottom, #fed7aa 0%, #d97706 60%, #b45309 100%);
+  border: 4px solid rgba(255, 255, 255, 0.35);
   box-shadow: 
-    0 10px 15px rgba(0, 0, 0, 0.2),
+    0 12px 25px rgba(0, 0, 0, 0.25),
     inset 0 2px 5px rgba(255, 255, 255, 0.5);
   z-index: 2;
 }
@@ -717,11 +723,13 @@ body {
   }
   .pedestal.body {
     width: 275px;
-    height: 60px;
+    height: 50px;
+    border-radius: 12px;
   }
   .pedestal.shadow {
     width: 300px;
-    height: 65px;
+    height: 55px;
+    border-radius: 12px;
   }
   .character-container {
     width: 285px;
@@ -759,11 +767,13 @@ body {
   }
   .pedestal.body {
     width: 215px;
-    height: 45px;
+    height: 35px;
+    border-radius: 8px;
   }
   .pedestal.shadow {
     width: 225px;
-    height: 45px;
+    height: 35px;
+    border-radius: 8px;
   }
   .character-container {
     width: 210px;
