@@ -26,7 +26,8 @@ class App {
       'rabbit': 'animal-rabbit',
       'bunny': 'animal-rabbit',
       'dragon': 'animal-dragon',
-      'lion': 'animal-lion'
+      'lion': 'animal-lion',
+      'cow': 'animal-cow'
     };
 
     // Cache DOM Elements
@@ -49,7 +50,8 @@ class App {
       'dog': document.getElementById('animal-dog'),
       'rabbit': document.getElementById('animal-rabbit'),
       'dragon': document.getElementById('animal-dragon'),
-      'lion': document.getElementById('animal-lion')
+      'lion': document.getElementById('animal-lion'),
+      'cow': document.getElementById('animal-cow')
     };
 
     this.initEvents();
