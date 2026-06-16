@@ -34,8 +34,8 @@ class App {
       'donkey': 'donkey',
       'giraffe': 'giraffe',
       'tiger': 'tiger',
-      'toucan': 'toucan', 'tucan': 'toucan',
-      'alligator': 'alligator', 'aligator': 'alligator', 'crocodile': 'alligator'
+      'alligator': 'alligator', 'aligator': 'alligator', 'crocodile': 'alligator',
+      'rhino': 'rhino', 'rhinoceros': 'rhino'
     };
 
     // Cache DOM Elements
@@ -70,7 +70,8 @@ class App {
       'giraffe': document.getElementById('animal-giraffe'),
       'tiger': document.getElementById('animal-tiger'),
       'toucan': document.getElementById('animal-toucan'),
-      'alligator': document.getElementById('animal-alligator')
+      'alligator': document.getElementById('animal-alligator'),
+      'rhino': document.getElementById('animal-rhino')
     };
 
     this.initEvents();
@@ -299,7 +300,7 @@ class App {
       // 2. If no exact match, try fuzzy Levenshtein match on individual words
       if (!matchedAnimal) {
         const words = currentSpeech.split(/\s+/);
-        const coreAnimals = ['cat', 'dog', 'rabbit', 'lion', 'dragon', 'cow', 'horse', 'pig', 'bear', 'sheep', 'elephant', 'chicken', 'donkey', 'giraffe', 'tiger', 'toucan', 'alligator'];
+        const coreAnimals = ['cat', 'dog', 'rabbit', 'lion', 'dragon', 'cow', 'horse', 'pig', 'bear', 'sheep', 'elephant', 'chicken', 'donkey', 'giraffe', 'tiger', 'toucan', 'alligator', 'rhino'];
         
         for (const word of words) {
           if (word.length < 2) continue; // skip single letter noise
