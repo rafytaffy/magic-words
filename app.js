@@ -332,8 +332,9 @@ class App {
         }
       }
 
-      // 3. If matched, update bubble and trigger summon, otherwise trigger a random animal!
+      // 3. If matched, update bubble and trigger summon, otherwise show heard phrase and ignore
       if (matchedAnimal) {
+        if (this.clearFeedTimeout) clearTimeout(this.clearFeedTimeout);
         this.speechFeedBubble.classList.add('recognized');
         if (isExact) {
           this.speechFeedBubble.innerText = `Summoning: ${matchedAnimal.toUpperCase()}!`;
@@ -342,8 +343,16 @@ class App {
         }
         this.handleAnimalTrigger(matchedAnimal);
       } else {
-        // Did not recognize, trigger random animal for playfulness
-        this.triggerRandomAnimal("Not sure... Summoning: ");
+        // Did not recognize, show what was heard but do not summon
+        this.speechFeedBubble.innerText = `Heard: "${currentSpeech}"`;
+        this.speechFeedBubble.classList.remove('recognized');
+        
+        if (this.clearFeedTimeout) clearTimeout(this.clearFeedTimeout);
+        this.clearFeedTimeout = setTimeout(() => {
+          if (this.state === STATES.IDLE_WAITING) {
+            this.speechFeedBubble.innerText = "Say an animal name...";
+          }
+        }, 2000);
       }
     };
 
