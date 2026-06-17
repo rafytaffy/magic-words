@@ -41,7 +41,24 @@ class App {
       'lizard': 'lizard', 'lizardy': 'lizard', 'liz': 'lizard', 'wizado': 'lizard',
       'duck': 'duck', 'ducky': 'duck', 'quack': 'duck', 'duk': 'duck',
       'goat': 'goat', 'gote': 'goat', 'got': 'goat', 'billy': 'goat',
-      'turkey': 'turkey', 'turki': 'turkey', 'gobble': 'turkey', 'tukey': 'turkey'
+      'turkey': 'turkey', 'turki': 'turkey', 'gobble': 'turkey', 'tukey': 'turkey',
+      'monkey': 'monkey', 'monky': 'monkey', 'montey': 'monkey',
+      'zebra': 'zebra', 'sebra': 'zebra', 'zibra': 'zebra',
+      'kangaroo': 'kangaroo', 'kangar': 'kangaroo', 'roo': 'kangaroo',
+      'penguin': 'penguin', 'pewgwid': 'penguin', 'pengin': 'penguin',
+      'panda': 'panda', 'pauda': 'panda', 'pand': 'panda',
+      'fox': 'fox', 'poks': 'fox', 'foks': 'fox',
+      'koala': 'koala', 'kowala': 'koala', 'koala-bear': 'koala',
+      'squirrel': 'squirrel', 'skwirel': 'squirrel', 'skwirl': 'squirrel',
+      'deer': 'deer', 'dih': 'deer', 'dear': 'deer',
+      'owl': 'owl', 'oul': 'owl', 'howl': 'owl',
+      'wolf': 'wolf', 'wuf': 'wolf', 'wuff': 'wolf',
+      'whale': 'whale', 'wayl': 'whale', 'wail': 'whale',
+      'seal': 'seal', 'seel': 'seal',
+      'otter': 'otter', 'atah': 'otter',
+      'snake': 'snake', 'nake': 'snake', 'nakey': 'snake',
+      'camel': 'camel', 'kamul': 'camel',
+      'gorilla': 'gorilla', 'gorila': 'gorilla', 'rilla': 'gorilla'
     };
 
     // Cache DOM Elements
@@ -82,14 +99,34 @@ class App {
       'lizard': document.getElementById('animal-lizard'),
       'duck': document.getElementById('animal-duck'),
       'goat': document.getElementById('animal-goat'),
-      'turkey': document.getElementById('animal-turkey')
+      'turkey': document.getElementById('animal-turkey'),
+      'monkey': document.getElementById('animal-monkey'),
+      'zebra': document.getElementById('animal-zebra'),
+      'kangaroo': document.getElementById('animal-kangaroo'),
+      'penguin': document.getElementById('animal-penguin'),
+      'panda': document.getElementById('animal-panda'),
+      'fox': document.getElementById('animal-fox'),
+      'koala': document.getElementById('animal-koala'),
+      'squirrel': document.getElementById('animal-squirrel'),
+      'deer': document.getElementById('animal-deer'),
+      'owl': document.getElementById('animal-owl'),
+      'wolf': document.getElementById('animal-wolf'),
+      'whale': document.getElementById('animal-whale'),
+      'seal': document.getElementById('animal-seal'),
+      'otter': document.getElementById('animal-otter'),
+      'snake': document.getElementById('animal-snake'),
+      'camel': document.getElementById('animal-camel'),
+      'gorilla': document.getElementById('animal-gorilla')
     };
 
     // List of core animal keys
     this.coreAnimals = [
       'cat', 'dog', 'rabbit', 'dragon', 'lion', 'cow', 'horse', 'pig', 'bear', 'sheep', 
       'elephant', 'chicken', 'donkey', 'giraffe', 'tiger', 'toucan', 'alligator', 'rhino', 
-      'hippo', 'lizard', 'duck', 'goat', 'turkey'
+      'hippo', 'lizard', 'duck', 'goat', 'turkey',
+      'monkey', 'zebra', 'kangaroo', 'penguin', 'panda', 'fox', 'koala',
+      'squirrel', 'deer', 'owl', 'wolf', 'whale', 'seal', 'otter', 'snake',
+      'camel', 'gorilla'
     ];
 
     // Pre-calculate normalized toddler phonetic keys for all core animals
