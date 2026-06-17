@@ -58,7 +58,17 @@ class App {
       'otter': 'otter', 'atah': 'otter',
       'snake': 'snake', 'nake': 'snake', 'nakey': 'snake',
       'camel': 'camel', 'kamul': 'camel',
-      'gorilla': 'gorilla', 'gorila': 'gorilla', 'rilla': 'gorilla'
+      'gorilla': 'gorilla', 'gorila': 'gorilla', 'rilla': 'gorilla',
+      'frog': 'frog', 'wog': 'frog', 'fog': 'frog', 'froggy': 'frog',
+      'turtle': 'turtle', 'turtl': 'turtle', 'turt': 'turtle',
+      'dolphin': 'dolphin', 'dolfin': 'dolphin', 'dofin': 'dolphin',
+      'shark': 'shark', 'sark': 'shark', 'tark': 'shark',
+      'octopus': 'octopus', 'octo': 'octopus', 'pus': 'octopus',
+      'crab': 'crab', 'krab': 'crab', 'tab': 'crab',
+      'flamingo': 'flamingo', 'mingo': 'flamingo',
+      'parrot': 'parrot', 'parot': 'parrot', 'perot': 'parrot',
+      'mouse': 'mouse', 'mous': 'mouse', 'maus': 'mouse',
+      'hamster': 'hamster', 'hampster': 'hamster', 'hammy': 'hamster'
     };
 
     // Cache DOM Elements
@@ -116,7 +126,17 @@ class App {
       'otter': document.getElementById('animal-otter'),
       'snake': document.getElementById('animal-snake'),
       'camel': document.getElementById('animal-camel'),
-      'gorilla': document.getElementById('animal-gorilla')
+      'gorilla': document.getElementById('animal-gorilla'),
+      'frog': document.getElementById('animal-frog'),
+      'turtle': document.getElementById('animal-turtle'),
+      'dolphin': document.getElementById('animal-dolphin'),
+      'shark': document.getElementById('animal-shark'),
+      'octopus': document.getElementById('animal-octopus'),
+      'crab': document.getElementById('animal-crab'),
+      'flamingo': document.getElementById('animal-flamingo'),
+      'parrot': document.getElementById('animal-parrot'),
+      'mouse': document.getElementById('animal-mouse'),
+      'hamster': document.getElementById('animal-hamster')
     };
 
     // List of core animal keys
@@ -126,7 +146,8 @@ class App {
       'hippo', 'lizard', 'duck', 'goat', 'turkey',
       'monkey', 'zebra', 'kangaroo', 'penguin', 'panda', 'fox', 'koala',
       'squirrel', 'deer', 'owl', 'wolf', 'whale', 'seal', 'otter', 'snake',
-      'camel', 'gorilla'
+      'camel', 'gorilla', 'frog', 'turtle', 'dolphin', 'shark', 'octopus',
+      'crab', 'flamingo', 'parrot', 'mouse', 'hamster'
     ];
 
     // Pre-calculate normalized toddler phonetic keys for all core animals
