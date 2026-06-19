@@ -53,7 +53,7 @@ class App {
       'deer': 'deer', 'dih': 'deer', 'dear': 'deer',
       'owl': 'owl', 'oul': 'owl', 'howl': 'owl',
       'wolf': 'wolf', 'wuf': 'wolf', 'wuff': 'wolf',
-      'whale': 'whale', 'wayl': 'whale', 'wail': 'whale',
+      'whale': 'whale', 'wayl': 'whale', 'wail': 'whale', 'wale': 'whale', 'while': 'whale', 'well': 'whale', 'wheel': 'whale', 'whales': 'whale', 'rayl': 'whale', 'wayli': 'whale', 'waly': 'whale',
       'seal': 'seal', 'seel': 'seal',
       'otter': 'otter', 'atah': 'otter',
       'snake': 'snake', 'nake': 'snake', 'nakey': 'snake',
@@ -155,6 +155,21 @@ class App {
     this.coreAnimals.forEach(animal => {
       this.normalizedCoreAnimals[animal] = this.normalizeToddlerSpeech(animal);
     });
+
+    // Ignored filler words for phonetic matching
+    this.ignoredWords = new Set([
+      'the', 'a', 'an', 'and', 'or', 'but', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 
+      'have', 'has', 'had', 'do', 'does', 'did', 'to', 'from', 'in', 'on', 'at', 'by', 'for', 
+      'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after', 
+      'above', 'below', 'of', 'up', 'down', 'out', 'off', 'over', 'under', 'again', 'further', 
+      'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 
+      'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 
+      'same', 'so', 'than', 'too', 'very', 'can', 'will', 'just', 'should', 'now', 'i', 'me', 
+      'my', 'we', 'our', 'you', 'your', 'he', 'him', 'his', 'she', 'her', 'it', 'its', 'they', 
+      'them', 'their', 'what', 'which', 'who', 'whom', 'this', 'that', 'these', 'those', 'am',
+      'look', 'see', 'sea', 'show', 'please', 'say', 'summon', 'want', 'like', 'love', 'make',
+      'play', 'baby', 'toddler', 'kid', 'child', 'boy'
+    ]);
 
     this.initEvents();
   }
@@ -397,46 +412,52 @@ class App {
       let matchedAnimal = null;
       let isExact = false;
 
+      // Pass 1: Direct exact or explicit toddler map check (highest priority across the entire phrase)
       for (const word of words) {
-        if (word.length < 2) continue; // skip single letter noise
-
-        // 1. Direct exact or explicit toddler map check
+        if (word.length < 2) continue;
         if (this.supportedAnimals[word]) {
           matchedAnimal = this.supportedAnimals[word];
           isExact = true;
           break;
         }
+      }
 
-        // 2. Custom toddler phonetic normalization check
-        const normalizedWord = this.normalizeToddlerSpeech(word);
-        if (!normalizedWord || normalizedWord.length < 2) continue;
+      // Pass 2: Custom toddler phonetic normalization check (only run if no exact match is found)
+      if (!matchedAnimal) {
+        for (const word of words) {
+          if (word.length < 2) continue;
+          if (this.ignoredWords.has(word)) continue; // Skip common filler/ignored words
 
-        for (const target of this.coreAnimals) {
-          const normalizedTarget = this.normalizedCoreAnimals[target];
+          const normalizedWord = this.normalizeToddlerSpeech(word);
+          if (!normalizedWord || normalizedWord.length < 2) continue;
 
-          // Exact phonetic match
-          if (normalizedWord === normalizedTarget) {
-            matchedAnimal = target;
-            break;
+          for (const target of this.coreAnimals) {
+            const normalizedTarget = this.normalizedCoreAnimals[target];
+
+            // Exact phonetic match
+            if (normalizedWord === normalizedTarget) {
+              matchedAnimal = target;
+              break;
+            }
+
+            // Substring phonetic match (e.g. "gator" -> "alligator", "hippo" -> "hippopotamus")
+            if (normalizedWord.length >= 3 && (normalizedTarget.includes(normalizedWord) || normalizedWord.includes(normalizedTarget))) {
+              matchedAnimal = target;
+              break;
+            }
+
+            // Levenshtein phonetic distance
+            const distance = this.levenshtein(normalizedWord, normalizedTarget);
+            let threshold = 1;
+            if (normalizedTarget.length >= 6) threshold = 2;
+
+            if (distance <= threshold) {
+              matchedAnimal = target;
+              break;
+            }
           }
-
-          // Substring phonetic match (e.g. "gator" -> "alligator", "hippo" -> "hippopotamus")
-          if (normalizedWord.length >= 3 && (normalizedTarget.includes(normalizedWord) || normalizedWord.includes(normalizedTarget))) {
-            matchedAnimal = target;
-            break;
-          }
-
-          // Levenshtein phonetic distance
-          const distance = this.levenshtein(normalizedWord, normalizedTarget);
-          let threshold = 1;
-          if (normalizedTarget.length >= 6) threshold = 2;
-
-          if (distance <= threshold) {
-            matchedAnimal = target;
-            break;
-          }
+          if (matchedAnimal) break;
         }
-        if (matchedAnimal) break;
       }
 
       // 3. If matched, update bubble, show overlay, and trigger summon; otherwise remain silent
