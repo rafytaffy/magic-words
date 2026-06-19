@@ -68,12 +68,35 @@ class App {
       'flamingo': 'flamingo', 'mingo': 'flamingo',
       'parrot': 'parrot', 'parot': 'parrot', 'perot': 'parrot',
       'mouse': 'mouse', 'mous': 'mouse', 'maus': 'mouse',
-      'hamster': 'hamster', 'hampster': 'hamster', 'hammy': 'hamster'
+      'hamster': 'hamster', 'hampster': 'hamster', 'hammy': 'hamster',
+      'butterfly': 'butterfly', 'butter': 'butterfly', 'fly': 'butterfly', 'papat': 'butterfly',
+      'bee': 'bee', 'honeybee': 'bee', 'bih': 'bee',
+      'ladybug': 'ladybug', 'lady': 'ladybug', 'bug': 'ladybug',
+      'beetle': 'beetle', 'betl': 'beetle',
+      'cricket': 'cricket',
+      'firefly': 'firefly',
+      'seagull': 'seagull', 'gull': 'seagull',
+      'hummingbird': 'hummingbird', 'humming': 'hummingbird',
+      'hedgehog': 'hedgehog', 'hog': 'hedgehog', 'hedgie': 'hedgehog',
+      'platypus': 'platypus', 'platy': 'platypus',
+      'cheetah': 'cheetah', 'cheta': 'cheetah',
+      'leopard': 'leopard', 'leopard-cat': 'leopard',
+      'llama': 'llama', 'lama': 'llama',
+      'lobster': 'lobster', 'lopster': 'lobster',
+      'walrus': 'walrus',
+      'stingray': 'stingray', 'ray': 'stingray'
     };
 
     // Cache DOM Elements
     this.setupOverlay = document.getElementById('setup-overlay');
     this.startBtn = document.getElementById('start-btn');
+    this.hintsContainer = document.getElementById('hints-container');
+    this.hintCards = [
+      document.getElementById('hint-card-0'),
+      document.getElementById('hint-card-1'),
+      document.getElementById('hint-card-2'),
+      document.getElementById('hint-card-3')
+    ];
     this.boyFront = document.getElementById('boy-front');
     this.boyAction = document.getElementById('boy-action');
     this.speechBubble = document.getElementById('speech-bubble');
@@ -84,6 +107,11 @@ class App {
     this.statusLight = document.getElementById('status-light');
     this.statusLabel = document.getElementById('status-label');
     this.micBtn = document.getElementById('mic-btn');
+
+    // Catalog Modal Elements
+    this.catalogBtn = document.getElementById('catalog-btn');
+    this.catalogModal = document.getElementById('catalog-modal');
+    this.closeModalBtn = document.getElementById('close-modal-btn');
 
     // Animal image elements
     this.animalElements = {
@@ -136,18 +164,93 @@ class App {
       'flamingo': document.getElementById('animal-flamingo'),
       'parrot': document.getElementById('animal-parrot'),
       'mouse': document.getElementById('animal-mouse'),
-      'hamster': document.getElementById('animal-hamster')
+      'hamster': document.getElementById('animal-hamster'),
+      'butterfly': document.getElementById('animal-butterfly'),
+      'bee': document.getElementById('animal-bee'),
+      'ladybug': document.getElementById('animal-ladybug'),
+      'beetle': document.getElementById('animal-beetle'),
+      'cricket': document.getElementById('animal-cricket'),
+      'firefly': document.getElementById('animal-firefly'),
+      'seagull': document.getElementById('animal-seagull'),
+      'hummingbird': document.getElementById('animal-hummingbird'),
+      'hedgehog': document.getElementById('animal-hedgehog'),
+      'platypus': document.getElementById('animal-platypus'),
+      'cheetah': document.getElementById('animal-cheetah'),
+      'leopard': document.getElementById('animal-leopard'),
+      'llama': document.getElementById('animal-llama'),
+      'lobster': document.getElementById('animal-lobster'),
+      'walrus': document.getElementById('animal-walrus'),
+      'stingray': document.getElementById('animal-stingray')
     };
 
     // List of core animal keys
     this.coreAnimals = [
-      'cat', 'dog', 'rabbit', 'dragon', 'lion', 'cow', 'horse', 'pig', 'bear', 'sheep', 
-      'elephant', 'chicken', 'donkey', 'giraffe', 'tiger', 'toucan', 'alligator', 'rhino', 
-      'hippo', 'lizard', 'duck', 'goat', 'turkey',
-      'monkey', 'zebra', 'kangaroo', 'penguin', 'panda', 'fox', 'koala',
-      'squirrel', 'deer', 'owl', 'wolf', 'whale', 'seal', 'otter', 'snake',
-      'camel', 'gorilla', 'frog', 'turtle', 'dolphin', 'shark', 'octopus',
-      'crab', 'flamingo', 'parrot', 'mouse', 'hamster'
+      'cat',
+      'dog',
+      'rabbit',
+      'dragon',
+      'lion',
+      'cow',
+      'horse',
+      'pig',
+      'bear',
+      'sheep',
+      'elephant',
+      'chicken',
+      'donkey',
+      'giraffe',
+      'tiger',
+      'toucan',
+      'alligator',
+      'rhino',
+      'hippo',
+      'lizard',
+      'duck',
+      'goat',
+      'turkey',
+      'monkey',
+      'zebra',
+      'kangaroo',
+      'penguin',
+      'panda',
+      'fox',
+      'koala',
+      'squirrel',
+      'deer',
+      'owl',
+      'wolf',
+      'whale',
+      'seal',
+      'otter',
+      'snake',
+      'camel',
+      'gorilla',
+      'frog',
+      'turtle',
+      'dolphin',
+      'shark',
+      'octopus',
+      'crab',
+      'flamingo',
+      'parrot',
+      'mouse',
+      'hamster',
+      'butterfly',
+      'bee',
+      'ladybug',
+      'beetle',
+      'cricket',
+      'firefly',
+      'seagull',
+      'hummingbird',
+      'hedgehog',
+      'platypus',
+      'cheetah',
+      'leopard',
+      'llama',
+      'lobster',
+      'walrus',
+      'stingray'
     ];
 
     // Pre-calculate normalized toddler phonetic keys for all core animals
@@ -204,10 +307,28 @@ class App {
     this.startBtn.addEventListener('click', () => this.startMagic());
     this.micBtn.addEventListener('click', () => this.toggleListening());
 
+    // Suggestion Hint Cards click listeners to summon the clicked animal
+    this.hintCards.forEach(card => {
+      if (card) {
+        card.addEventListener('click', () => {
+          const animalName = card.dataset.animal;
+          if (animalName && this.state === STATES.IDLE_WAITING) {
+            this.handleAnimalTrigger(animalName);
+          }
+        });
+      }
+    });
+
     // Screen Touch / Tap listener to summon a random animal
     document.addEventListener('pointerdown', (e) => {
       // Ignore clicks on setup overlay, mic buttons, and start button
-      if (e.target.closest('#mic-btn') || e.target.closest('#setup-overlay') || e.target.closest('#start-btn')) return;
+      if (
+        e.target.closest('#mic-btn') || 
+        e.target.closest('#setup-overlay') || 
+        e.target.closest('#start-btn') ||
+        e.target.closest('#catalog-btn') ||
+        e.target.closest('#catalog-modal')
+      ) return;
 
       if (this.state === STATES.IDLE_WAITING) {
         this.triggerRandomAnimal("Screen Tap: ");
@@ -223,6 +344,19 @@ class App {
         this.triggerRandomAnimal(`Key [${e.key.toUpperCase()}]: `);
       }
     });
+
+    // Catalog button click events
+    if (this.catalogBtn) {
+      this.catalogBtn.addEventListener('click', () => this.openCatalog());
+    }
+    if (this.closeModalBtn) {
+      this.closeModalBtn.addEventListener('click', () => this.closeCatalog());
+    }
+    if (this.catalogModal) {
+      this.catalogModal.addEventListener('click', (e) => {
+        if (e.target === this.catalogModal) this.closeCatalog();
+      });
+    }
   }
 
   // Helper to summon a random animal from the active list
@@ -545,11 +679,24 @@ class App {
         this.boyFront.classList.add('active');
         this.boyAction.classList.remove('active');
         this.speechBubble.classList.remove('active');
+        
+        // Show and populate suggestion hint cards
+        if (this.hintsContainer) {
+          this.hintsContainer.classList.add('visible');
+          this.renderNewHints();
+        }
+        
         this.startListening();
         break;
 
       case STATES.HEARD:
         this.updateHUDState(STATES.HEARD, "Heard Word!");
+        
+        // Hide hint cards immediately during summon sequence
+        if (this.hintsContainer) {
+          this.hintsContainer.classList.remove('visible');
+        }
+        
         // Stop listening temporarily during summon sequence
         this.stopListening();
         break;
@@ -689,6 +836,110 @@ class App {
       this.state = STATES.RESET;
       this.transitionTo(STATES.IDLE_WAITING);
     }
+  }
+
+  openCatalog() {
+    if (this.catalogModal) {
+      this.buildAnimalGrid();
+      this.catalogModal.classList.add('active');
+      // Stop speech recognition briefly to avoid picking up sounds while looking at catalog
+      this.stopListening();
+    }
+  }
+
+  closeCatalog() {
+    if (this.catalogModal) {
+      this.catalogModal.classList.remove('active');
+      // Resume speech recognition if idle
+      if (this.state === STATES.IDLE_WAITING) {
+        this.startListening();
+      }
+    }
+  }
+
+  buildAnimalGrid() {
+    const grid = document.getElementById('modal-animal-grid');
+    if (!grid) return;
+    
+    grid.innerHTML = '';
+    const sortedAnimals = [...this.coreAnimals].sort();
+    
+    sortedAnimals.forEach(animal => {
+      const card = document.createElement('div');
+      card.className = 'animal-grid-card';
+      
+      const img = document.createElement('img');
+      img.src = `assets/animal_${animal}.png`;
+      img.alt = animal;
+      img.className = 'grid-animal-img';
+      img.loading = 'lazy';
+      
+      const name = document.createElement('div');
+      name.className = 'grid-animal-name';
+      name.innerText = animal.charAt(0).toUpperCase() + animal.slice(1);
+      
+      card.appendChild(img);
+      card.appendChild(name);
+      
+      card.addEventListener('click', () => {
+        this.closeCatalog();
+        if (this.state === STATES.IDLE_WAITING) {
+          this.speechFeedBubble.classList.add('recognized');
+          this.speechFeedBubble.innerText = `Summoning: ${animal.toUpperCase()}!`;
+          this.speechFeed.classList.add('visible');
+          this.handleAnimalTrigger(animal);
+        }
+      });
+      
+      grid.appendChild(card);
+    });
+  }
+
+  // Select 4 random unique animals and render them with staggered bouncy entrance animations
+  renderNewHints() {
+    if (!this.hintsContainer) return;
+
+    // Filter out the currently active/summoned animal if there is one
+    const available = [...this.coreAnimals].filter(a => a !== this.currentAnimal);
+    
+    // Pick 4 unique random animals
+    const selected = [];
+    while (selected.length < 4 && available.length > 0) {
+      const idx = Math.floor(Math.random() * available.length);
+      const chosen = available.splice(idx, 1)[0];
+      selected.push(chosen);
+    }
+
+    // Exit transition for all cards (fade-out)
+    this.hintCards.forEach(card => {
+      if (card) card.classList.remove('visible');
+    });
+
+    // Wait for exit transition to complete (400ms), then update content and bounce-pop in
+    setTimeout(() => {
+      selected.forEach((animal, index) => {
+        const card = this.hintCards[index];
+        if (!card) return;
+
+        // Set dataset and content
+        card.dataset.animal = animal;
+        const img = card.querySelector('.hint-img');
+        const text = card.querySelector('.hint-text');
+        
+        if (img) {
+          img.src = `assets/animal_${animal}.png`;
+          img.alt = animal;
+        }
+        if (text) {
+          text.innerText = animal;
+        }
+
+        // Staggered pop-in animation
+        setTimeout(() => {
+          card.classList.add('visible');
+        }, index * 80); // 80ms stagger delay
+      });
+    }, 400);
   }
 }
 

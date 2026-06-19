@@ -69,7 +69,6 @@
 
           <!-- Summoned Animal Container -->
           <div class="character-container" id="animal-char">
-            <!-- Preloaded animals, toggled by JS classes -->
             <img src="assets/animal_cat.png" alt="Cat" class="animal-img" id="animal-cat">
             <img src="assets/animal_dog.png" alt="Dog" class="animal-img" id="animal-dog">
             <img src="assets/animal_rabbit.png" alt="Rabbit" class="animal-img" id="animal-rabbit">
@@ -120,6 +119,22 @@
             <img src="assets/animal_parrot.png" alt="Parrot" class="animal-img" id="animal-parrot">
             <img src="assets/animal_mouse.png" alt="Mouse" class="animal-img" id="animal-mouse">
             <img src="assets/animal_hamster.png" alt="Hamster" class="animal-img" id="animal-hamster">
+            <img src="assets/animal_butterfly.png" alt="Butterfly" class="animal-img" id="animal-butterfly">
+            <img src="assets/animal_bee.png" alt="Bee" class="animal-img" id="animal-bee">
+            <img src="assets/animal_ladybug.png" alt="Ladybug" class="animal-img" id="animal-ladybug">
+            <img src="assets/animal_beetle.png" alt="Beetle" class="animal-img" id="animal-beetle">
+            <img src="assets/animal_cricket.png" alt="Cricket" class="animal-img" id="animal-cricket">
+            <img src="assets/animal_firefly.png" alt="Firefly" class="animal-img" id="animal-firefly">
+            <img src="assets/animal_seagull.png" alt="Seagull" class="animal-img" id="animal-seagull">
+            <img src="assets/animal_hummingbird.png" alt="Hummingbird" class="animal-img" id="animal-hummingbird">
+            <img src="assets/animal_hedgehog.png" alt="Hedgehog" class="animal-img" id="animal-hedgehog">
+            <img src="assets/animal_platypus.png" alt="Platypus" class="animal-img" id="animal-platypus">
+            <img src="assets/animal_cheetah.png" alt="Cheetah" class="animal-img" id="animal-cheetah">
+            <img src="assets/animal_leopard.png" alt="Leopard" class="animal-img" id="animal-leopard">
+            <img src="assets/animal_llama.png" alt="Llama" class="animal-img" id="animal-llama">
+            <img src="assets/animal_lobster.png" alt="Lobster" class="animal-img" id="animal-lobster">
+            <img src="assets/animal_walrus.png" alt="Walrus" class="animal-img" id="animal-walrus">
+            <img src="assets/animal_stingray.png" alt="Stingray" class="animal-img" id="animal-stingray">
           </div>
         </div>
       </div>
@@ -163,10 +178,51 @@
     </div>
   </div>
 
+  <!-- Suggestions Hint Row -->
+  <div id="hints-container" class="hints-container">
+    <h3>Try saying:</h3>
+    <div class="hints-row">
+      <div class="hint-card" id="hint-card-0">
+        <img class="hint-img" src="" alt="">
+        <span class="hint-text"></span>
+      </div>
+      <div class="hint-card" id="hint-card-1">
+        <img class="hint-img" src="" alt="">
+        <span class="hint-text"></span>
+      </div>
+      <div class="hint-card" id="hint-card-2">
+        <img class="hint-img" src="" alt="">
+        <span class="hint-text"></span>
+      </div>
+      <div class="hint-card" id="hint-card-3">
+        <img class="hint-img" src="" alt="">
+        <span class="hint-text"></span>
+      </div>
+    </div>
+  </div>
+
   <!-- Sub-HUD Overlay for Speech Feed -->
   <div class="speech-feed" id="speech-feed">
     <div class="speech-feed-bubble">
       Say an animal name...
+    </div>
+  </div>
+
+  <!-- Button to open Animal Catalog Modal -->
+  <button id="catalog-btn" class="catalog-btn" title="List of Animals">
+    🐾
+  </button>
+
+  <!-- Animal Catalog Modal -->
+  <div class="modal-overlay" id="catalog-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>List of Animals</h2>
+        <button class="close-btn" id="close-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="animal-grid" id="modal-animal-grid"></div>
+      </div>
     </div>
   </div>
 
