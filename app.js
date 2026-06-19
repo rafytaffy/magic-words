@@ -84,7 +84,8 @@ class App {
       'llama': 'llama', 'lama': 'llama',
       'lobster': 'lobster', 'lopster': 'lobster',
       'walrus': 'walrus',
-      'stingray': 'stingray', 'ray': 'stingray'
+      'stingray': 'stingray', 'ray': 'stingray',
+      'squid': 'squid'
     };
 
     // Cache DOM Elements
@@ -180,7 +181,8 @@ class App {
       'llama': document.getElementById('animal-llama'),
       'lobster': document.getElementById('animal-lobster'),
       'walrus': document.getElementById('animal-walrus'),
-      'stingray': document.getElementById('animal-stingray')
+      'stingray': document.getElementById('animal-stingray'),
+      'squid': document.getElementById('animal-squid')
     };
 
     // List of core animal keys
@@ -250,7 +252,8 @@ class App {
       'llama',
       'lobster',
       'walrus',
-      'stingray'
+      'stingray',
+      'squid'
     ];
 
     // Pre-calculate normalized toddler phonetic keys for all core animals
