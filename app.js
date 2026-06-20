@@ -85,7 +85,13 @@ class App {
       'lobster': 'lobster', 'lopster': 'lobster',
       'walrus': 'walrus',
       'stingray': 'stingray', 'ray': 'stingray',
-      'squid': 'squid'
+      'squid': 'squid',
+      'shrimp': 'shrimp', 'srimp': 'shrimp',
+      'eel': 'eel',
+      'pelican': 'pelican',
+      'clam': 'clam', 'clem': 'clam',
+      'goldfish': 'goldfish', 'gold': 'goldfish', 'fish': 'goldfish',
+      'orca': 'orca', 'killer-whale': 'orca'
     };
 
     // Cache DOM Elements
@@ -182,7 +188,13 @@ class App {
       'lobster': document.getElementById('animal-lobster'),
       'walrus': document.getElementById('animal-walrus'),
       'stingray': document.getElementById('animal-stingray'),
-      'squid': document.getElementById('animal-squid')
+      'squid': document.getElementById('animal-squid'),
+      'shrimp': document.getElementById('animal-shrimp'),
+      'eel': document.getElementById('animal-eel'),
+      'pelican': document.getElementById('animal-pelican'),
+      'clam': document.getElementById('animal-clam'),
+      'goldfish': document.getElementById('animal-goldfish'),
+      'orca': document.getElementById('animal-orca')
     };
 
     // List of core animal keys
@@ -253,7 +265,13 @@ class App {
       'lobster',
       'walrus',
       'stingray',
-      'squid'
+      'squid',
+      'shrimp',
+      'eel',
+      'pelican',
+      'clam',
+      'goldfish',
+      'orca'
     ];
 
     // Pre-calculate normalized toddler phonetic keys for all core animals
