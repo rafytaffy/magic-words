@@ -91,7 +91,18 @@ class App {
       'pelican': 'pelican',
       'clam': 'clam', 'clem': 'clam',
       'goldfish': 'goldfish', 'gold': 'goldfish', 'fish': 'goldfish',
-      'orca': 'orca', 'killer-whale': 'orca'
+      'orca': 'orca', 'killer-whale': 'orca',
+      'caterpillar': 'caterpillar', 'piller': 'caterpillar', 'cater': 'caterpillar',
+      'ant': 'ant', 'ent': 'ant',
+      'spider': 'spider', 'pider': 'spider', 'spy': 'spider',
+      'centipede': 'centipede',
+      'moth': 'moth',
+      'eagle': 'eagle', 'egl': 'eagle',
+      'raccoon': 'raccoon', 'coon': 'raccoon',
+      'sloth': 'sloth', 'slof': 'sloth',
+      'alpaca': 'alpaca',
+      'meerkat': 'meerkat', 'kat': 'meerkat',
+      'chameleon': 'chameleon', 'cham': 'chameleon'
     };
 
     // Cache DOM Elements
@@ -194,7 +205,18 @@ class App {
       'pelican': document.getElementById('animal-pelican'),
       'clam': document.getElementById('animal-clam'),
       'goldfish': document.getElementById('animal-goldfish'),
-      'orca': document.getElementById('animal-orca')
+      'orca': document.getElementById('animal-orca'),
+      'caterpillar': document.getElementById('animal-caterpillar'),
+      'ant': document.getElementById('animal-ant'),
+      'spider': document.getElementById('animal-spider'),
+      'centipede': document.getElementById('animal-centipede'),
+      'moth': document.getElementById('animal-moth'),
+      'eagle': document.getElementById('animal-eagle'),
+      'raccoon': document.getElementById('animal-raccoon'),
+      'sloth': document.getElementById('animal-sloth'),
+      'alpaca': document.getElementById('animal-alpaca'),
+      'meerkat': document.getElementById('animal-meerkat'),
+      'chameleon': document.getElementById('animal-chameleon')
     };
 
     // List of core animal keys
@@ -271,7 +293,18 @@ class App {
       'pelican',
       'clam',
       'goldfish',
-      'orca'
+      'orca',
+      'caterpillar',
+      'ant',
+      'spider',
+      'centipede',
+      'moth',
+      'eagle',
+      'raccoon',
+      'sloth',
+      'alpaca',
+      'meerkat',
+      'chameleon'
     ];
 
     // Pre-calculate normalized toddler phonetic keys for all core animals
