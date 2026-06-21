@@ -102,7 +102,22 @@ class App {
       'sloth': 'sloth', 'slof': 'sloth',
       'alpaca': 'alpaca',
       'meerkat': 'meerkat', 'kat': 'meerkat',
-      'chameleon': 'chameleon', 'cham': 'chameleon'
+      'chameleon': 'chameleon', 'cham': 'chameleon',
+      'snail': 'snail', 'nayl': 'snail',
+      'worm': 'worm', 'werm': 'worm',
+      'dragonfly': 'dragonfly',
+      'grasshopper': 'grasshopper', 'hopper': 'grasshopper',
+      'swan': 'swan', 'swon': 'swan',
+      'peacock': 'peacock', 'pea': 'peacock',
+      'woodpecker': 'woodpecker', 'pecker': 'woodpecker',
+      'pigeon': 'pigeon', 'pidgin': 'pigeon',
+      'skunk': 'skunk', 'kunk': 'skunk',
+      'beaver': 'beaver', 'bever': 'beaver',
+      'bat': 'bat', 'bet': 'bat',
+      'porcupine': 'porcupine', 'porky': 'porcupine',
+      'jellyfish': 'jellyfish', 'jelly': 'jellyfish',
+      'starfish': 'starfish', 'star': 'starfish',
+      'seahorse': 'seahorse'
     };
 
     // Cache DOM Elements
@@ -216,7 +231,22 @@ class App {
       'sloth': document.getElementById('animal-sloth'),
       'alpaca': document.getElementById('animal-alpaca'),
       'meerkat': document.getElementById('animal-meerkat'),
-      'chameleon': document.getElementById('animal-chameleon')
+      'chameleon': document.getElementById('animal-chameleon'),
+      'snail': document.getElementById('animal-snail'),
+      'worm': document.getElementById('animal-worm'),
+      'dragonfly': document.getElementById('animal-dragonfly'),
+      'grasshopper': document.getElementById('animal-grasshopper'),
+      'swan': document.getElementById('animal-swan'),
+      'peacock': document.getElementById('animal-peacock'),
+      'woodpecker': document.getElementById('animal-woodpecker'),
+      'pigeon': document.getElementById('animal-pigeon'),
+      'skunk': document.getElementById('animal-skunk'),
+      'beaver': document.getElementById('animal-beaver'),
+      'bat': document.getElementById('animal-bat'),
+      'porcupine': document.getElementById('animal-porcupine'),
+      'jellyfish': document.getElementById('animal-jellyfish'),
+      'starfish': document.getElementById('animal-starfish'),
+      'seahorse': document.getElementById('animal-seahorse')
     };
 
     // List of core animal keys
@@ -304,7 +334,22 @@ class App {
       'sloth',
       'alpaca',
       'meerkat',
-      'chameleon'
+      'chameleon',
+      'snail',
+      'worm',
+      'dragonfly',
+      'grasshopper',
+      'swan',
+      'peacock',
+      'woodpecker',
+      'pigeon',
+      'skunk',
+      'beaver',
+      'bat',
+      'porcupine',
+      'jellyfish',
+      'starfish',
+      'seahorse'
     ];
 
     // Pre-calculate normalized toddler phonetic keys for all core animals

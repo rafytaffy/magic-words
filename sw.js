@@ -1,4 +1,4 @@
-const CACHE_NAME = 'magic-words-cache-v29';
+const CACHE_NAME = 'magic-words-cache-v30';
 const ASSETS = [
   'index.html',
   'styles.css',
@@ -90,7 +90,22 @@ const ASSETS = [
   'assets/animal_sloth.png',
   'assets/animal_alpaca.png',
   'assets/animal_meerkat.png',
-  'assets/animal_chameleon.png'
+  'assets/animal_chameleon.png',
+  'assets/animal_snail.png',
+  'assets/animal_worm.png',
+  'assets/animal_dragonfly.png',
+  'assets/animal_grasshopper.png',
+  'assets/animal_swan.png',
+  'assets/animal_peacock.png',
+  'assets/animal_woodpecker.png',
+  'assets/animal_pigeon.png',
+  'assets/animal_skunk.png',
+  'assets/animal_beaver.png',
+  'assets/animal_bat.png',
+  'assets/animal_porcupine.png',
+  'assets/animal_jellyfish.png',
+  'assets/animal_starfish.png',
+  'assets/animal_seahorse.png'
 ];
 
 // Install Service Worker
