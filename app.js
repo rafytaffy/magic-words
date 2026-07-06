@@ -29,7 +29,7 @@ class App {
       'pig': 'pig', 'piddy': 'pig', 'piggy': 'pig', 'pik': 'pig',
       'bear': 'bear', 'beh': 'bear', 'bare': 'bear', 'behr': 'bear',
       'sheep': 'sheep', 'seep': 'sheep', 'heep': 'sheep', 'shee': 'sheep', 'baa': 'sheep',
-      'elephant': 'elephant', 'elphant': 'elephant', 'efant': 'elephant', 'ellie': 'elephant', 'elpat': 'elephant', 'elph': 'elephant',
+      'elephant': 'elephant', 'elphant': 'elephant', 'efant': 'elephant', 'ellie': 'elephant', 'elpat': 'elephant', 'elph': 'elephant', 'pepant': 'elephant',
       'chicken': 'chicken', 'chick': 'chicken', 'hen': 'chicken',
       'donkey': 'donkey',
       'giraffe': 'giraffe',
@@ -40,7 +40,7 @@ class App {
       'hippo': 'hippo', 'hippopotamus': 'hippo', 'hipo': 'hippo', 'hepo': 'hippo',
       'lizard': 'lizard', 'lizardy': 'lizard', 'liz': 'lizard', 'wizado': 'lizard',
       'duck': 'duck', 'ducky': 'duck', 'quack': 'duck', 'duk': 'duck',
-      'goat': 'goat', 'gote': 'goat', 'got': 'goat', 'billy': 'goat',
+      'goat': 'goat', 'gote': 'goat', 'got': 'goat', 'billy': 'goat', 'cote': 'goat',
       'turkey': 'turkey', 'turki': 'turkey', 'gobble': 'turkey', 'tukey': 'turkey',
       'monkey': 'monkey', 'monky': 'monkey', 'montey': 'monkey',
       'zebra': 'zebra', 'sebra': 'zebra', 'zibra': 'zebra',
@@ -101,7 +101,7 @@ class App {
       'raccoon': 'raccoon', 'coon': 'raccoon',
       'sloth': 'sloth', 'slof': 'sloth',
       'alpaca': 'alpaca',
-      'meerkat': 'meerkat', 'kat': 'meerkat',
+      'meerkat': 'meerkat',
       'chameleon': 'chameleon', 'cham': 'chameleon',
       'snail': 'snail', 'nayl': 'snail',
       'worm': 'worm', 'werm': 'worm',
@@ -381,23 +381,18 @@ class App {
     let w = word.toLowerCase().trim();
     if (!w) return "";
 
-    // 1. Map stops and fricatives: 'ph' / 'f' -> 'p'
-    w = w.replace(/ph/g, 'p').replace(/f/g, 'p');
-
-    // 2. Map 'th' / 'sh' / 'ch' -> 't' or 's'
+    // 1. Digraphs and stops: ph -> f, th -> t, sh -> s, ch -> t
+    w = w.replace(/ph/g, 'f');
     w = w.replace(/th/g, 't').replace(/sh/g, 's').replace(/ch/g, 't');
 
-    // 3. Gliding & liquid normalization: map starting/middle 'w', 'y', 'l', 'r' to 'r'
+    // 2. Liquids & Glides: l, w, y -> r (toddlers swap these constantly)
     w = w.replace(/l/g, 'r').replace(/w/g, 'r').replace(/y/g, 'r');
 
-    // 4. Fronting: map back sounds ('c', 'k', 'q', 'g') and front stops ('t', 'd') to single category 'k'
-    w = w.replace(/c/g, 'k').replace(/q/g, 'k').replace(/g/g, 'k').replace(/t/g, 'k').replace(/d/g, 'k');
+    // 3. Hard k/c/q/g spellings normalized to k (velar neutralization)
+    w = w.replace(/c/g, 'k').replace(/q/g, 'k').replace(/g/g, 'k');
 
-    // 5. Simplify double letters
+    // 4. Simplify double letters
     w = w.replace(/(.)\1+/g, '$1');
-
-    // 6. Simplify vowels: map all vowels to 'a'
-    w = w.replace(/[aeiou]/g, 'a');
 
     return w;
   }
@@ -664,19 +659,22 @@ class App {
           const normalizedWord = this.normalizeToddlerSpeech(word);
           if (!normalizedWord || normalizedWord.length < 2) continue;
 
+          let candidates = [];
+
           for (const target of this.coreAnimals) {
             const normalizedTarget = this.normalizedCoreAnimals[target];
 
-            // Exact phonetic match
+            // Exact match
             if (normalizedWord === normalizedTarget) {
-              matchedAnimal = target;
-              break;
+              candidates.push({ target, type: 'exact', distance: 0 });
+              continue;
             }
 
-            // Substring phonetic match (e.g. "gator" -> "alligator", "hippo" -> "hippopotamus")
-            if (normalizedWord.length >= 3 && (normalizedTarget.includes(normalizedWord) || normalizedWord.includes(normalizedTarget))) {
-              matchedAnimal = target;
-              break;
+            // Substring match (query must be a substring of target, e.g. "gator" -> "alligator")
+            if (normalizedWord.length >= 3 && normalizedTarget.includes(normalizedWord)) {
+              const lenDiff = Math.abs(normalizedTarget.length - normalizedWord.length);
+              candidates.push({ target, type: 'substring', distance: lenDiff });
+              continue;
             }
 
             // Levenshtein phonetic distance
@@ -685,11 +683,34 @@ class App {
             if (normalizedTarget.length >= 6) threshold = 2;
 
             if (distance <= threshold) {
-              matchedAnimal = target;
-              break;
+              candidates.push({ target, type: 'fuzzy', distance: distance });
             }
           }
-          if (matchedAnimal) break;
+
+          if (candidates.length > 0) {
+            candidates.sort((a, b) => {
+              // Exact match is top priority
+              if (a.type === 'exact' && b.type !== 'exact') return -1;
+              if (b.type === 'exact' && a.type !== 'exact') return 1;
+
+              // Substring match is second priority
+              if (a.type === 'substring' && b.type !== 'substring') return -1;
+              if (b.type === 'substring' && a.type !== 'substring') return 1;
+
+              // Compare distance
+              if (a.distance !== b.distance) {
+                return a.distance - b.distance;
+              }
+
+              // Tie-breaker: choose target closer in name length to the user's word
+              const lenDiffA = Math.abs(a.target.length - word.length);
+              const lenDiffB = Math.abs(b.target.length - word.length);
+              return lenDiffA - lenDiffB;
+            });
+
+            matchedAnimal = candidates[0].target;
+            break;
+          }
         }
       }
 
