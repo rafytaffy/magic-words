@@ -413,15 +413,15 @@ class App {
       }
     });
 
-    // Screen Touch / Tap listener to summon a random animal
     document.addEventListener('pointerdown', (e) => {
-      // Ignore clicks on setup overlay, mic buttons, and start button
+      // Ignore clicks on setup overlay, mic buttons, start button, and suggestion cards
       if (
         e.target.closest('#mic-btn') || 
         e.target.closest('#setup-overlay') || 
         e.target.closest('#start-btn') ||
         e.target.closest('#catalog-btn') ||
-        e.target.closest('#catalog-modal')
+        e.target.closest('#catalog-modal') ||
+        e.target.closest('#hints-container')
       ) return;
 
       if (this.state === STATES.IDLE_WAITING) {

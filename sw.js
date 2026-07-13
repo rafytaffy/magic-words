@@ -1,4 +1,4 @@
-const CACHE_NAME = 'magic-words-cache-v32';
+const CACHE_NAME = 'magic-words-cache-v33';
 const ASSETS = [
   'index.html',
   'styles.css',
