@@ -292,6 +292,10 @@ body {
   display: block;
 }
 
+#boy-action {
+  transform: scaleX(-1);
+}
+
 /* Animating Wand tip coordinate */
 #wand-tip {
   position: absolute;
