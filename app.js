@@ -566,8 +566,10 @@ class App {
   // Speak a phrase using the Web Speech Synthesis API
   speak(phrase) {
     if ('speechSynthesis' in window) {
-      // Cancel active voice to avoid stacking
-      window.speechSynthesis.cancel();
+      // Only cancel if actively speaking to avoid iOS queue lockups
+      if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+      }
       
       const utterance = new SpeechSynthesisUtterance(phrase);
       utterance.lang = 'en-US';
@@ -581,6 +583,19 @@ class App {
         utterance.voice = childVoice;
       }
       
+      // Prevent garbage collection of the utterance object during playback on Safari/Chrome
+      this.currentUtterance = utterance;
+      utterance.onend = () => {
+        if (this.currentUtterance === utterance) {
+          this.currentUtterance = null;
+        }
+      };
+      utterance.onerror = () => {
+        if (this.currentUtterance === utterance) {
+          this.currentUtterance = null;
+        }
+      };
+      
       window.speechSynthesis.speak(utterance);
     }
   }
@@ -593,6 +608,12 @@ class App {
     
     // Small chime to confirm audio initialized
     this.playWandSound();
+
+    // Prime the SpeechSynthesis engine on user gesture to unlock it for iOS/iPadOS Safari
+    if ('speechSynthesis' in window) {
+      const primeUtterance = new SpeechSynthesisUtterance('');
+      window.speechSynthesis.speak(primeUtterance);
+    }
     
     // Init speech recognition
     this.initSpeechRecognition();
